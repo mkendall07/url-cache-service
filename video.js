@@ -57,7 +57,13 @@ function UrlCache(content, contentType) {
 }
 
 function makeRequest(url, id) {
-  request(url, function (error, response, body) {
+  var options = {
+    url: url,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
+    }
+  };
+  request(options, function (error, response, body) {
   if (!error && response.statusCode == 200) {
     urlItem = new UrlCache(body, response.headers['content-type']);
     memoryCache.set(id, urlItem);
